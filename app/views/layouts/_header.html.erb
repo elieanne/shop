@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default border-bottom shadow-sm bg-light" role="navigation">
+    <div class="container">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/items">Home</a>
+            </li>
+            <% if user_signed_in? %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders/new">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders">Orders history</a>
+                </li>
+            <% end %>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right d-flex flex-row gap-3 align-items-center">
+            <% if user_signed_in? %>
+                <p class="my-0 text-secondary"><%= current_user.first_name %></p>
+                <li><%= link_to current_user.email, edit_user_registration_path %></li>
+                <li><%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-sm btn-block btn-outline-primary" %></li>
+            <% else %>
+                <%= link_to new_user_registration_path do%>
+                    <button type="button" class="btn btn-sm btn-block btn-outline-primary">Sign up</button>
+                <% end %>
+                <%= link_to new_user_session_path do%>
+                    <button type="button" class="btn btn-sm btn-block btn-primary">Login</button>
+                <% end %>
+            <% end %>
+        </ul>
+    </div>
+</nav>
